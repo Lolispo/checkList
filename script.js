@@ -100,13 +100,13 @@ function initMap(){
 	data.addObject('activity', 'Vad ska du göra?');
 
 	data.getObject('activity').addObject('hänga');
-	data.getObject('activity').addInnerList('hänga', ['alvedon', 'pl&aring;nbok']);
+	data.getObject('activity').addInnerList('hänga', ['alvedon', 'plånbok']);
 
 	data.getObject('activity').addObject('bada');
 	data.getObject('activity').addInnerList('bada', ['bikini', 'handduk', 'ombyte', 'h&aring;rborste']);
 
 	data.getObject('activity').addObject('shoppa');
-	data.getObject('activity').addInnerList('shoppa', ['plå	nbok']);
+	data.getObject('activity').addInnerList('shoppa', ['plånbok']);
 
 	data.getObject('activity').addObject('träna', 'Träna: 	Hur ska du träna?');
 	var trainingList =  ['vattenflaska', 'hårsnodd', 'träningskläder'];
