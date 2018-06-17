@@ -7,6 +7,12 @@ const htmlListID = 'marked';
 const htmlResultID = 'result';
 const htmlInnerID = 'markedInner';
 
+/*
+	TODO
+		Välja multiple om man vill för vissa ämnen, t.ex. när på dagen
+		Bättre css etc
+*/
+
 function DataObject(name, newQuestion=''){
 	this.name = name;
 	this.question = newQuestion;
@@ -115,9 +121,7 @@ function initMap(){
 	data.getObject('activity').getObject('träna').addInnerList('gym', trainingList.concat(['lås', 'friskiskort', 'träningsskor']));
 	data.getObject('activity').getObject('träna').addInnerList('inte gym', trainingList);
 
-
 	// Seasons, görs automatiskt
-
 
 	data.addObject('timeofday', 'När på dagen är det?');
 	data.getObject('timeofday').addObject('dagen');
