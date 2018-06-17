@@ -1,10 +1,11 @@
-'use strict';
+﻿'use strict';
 // Author: Petter Andersson
 
 var map;
 var date;
 const htmlListID = 'marked';
 const htmlResultID = 'result';
+const htmlInnerID = 'markedInner';
 
 function DataObject(name, newQuestion=''){
 	this.name = name;
@@ -87,7 +88,6 @@ function DataObject(name, newQuestion=''){
 function main(){
 	date = new Date();
 	initMap();
-
 	updateVisibleList(map);
 }
 
@@ -100,22 +100,23 @@ function initMap(){
 	data.addObject('activity', 'Vad ska du göra?');
 
 	data.getObject('activity').addObject('hänga');
-	data.getObject('activity').addInnerList('hänga', ['alvedon', 'plånbok']);
+	data.getObject('activity').addInnerList('hänga', ['alvedon', 'pl&aring;nbok']);
 
 	data.getObject('activity').addObject('bada');
-	data.getObject('activity').addInnerList('bada', ['bikini', 'handduk', 'ombyte', 'hårborste']);
+	data.getObject('activity').addInnerList('bada', ['bikini', 'handduk', 'ombyte', 'h&aring;rborste']);
 
 	data.getObject('activity').addObject('shoppa');
-	data.getObject('activity').addInnerList('shoppa', ['plånbok']);
+	data.getObject('activity').addInnerList('shoppa', ['plå	nbok']);
 
 	data.getObject('activity').addObject('träna', 'Träna: 	Hur ska du träna?');
-	data.getObject('activity').addInnerList('träna', ['vattenflaska', 'hårsnodd', 'träningskläder']);
+	var trainingList =  ['vattenflaska', 'hårsnodd', 'träningskläder'];
 	data.getObject('activity').getObject('träna').addObject('gym');
 	data.getObject('activity').getObject('träna').addObject('inte gym');
-	data.getObject('activity').getObject('träna').addInnerList('gym', ['lås', 'friskiskort', 'träningsskor']);
+	data.getObject('activity').getObject('träna').addInnerList('gym', trainingList.concat(['lås', 'friskiskort', 'träningsskor']));
+	data.getObject('activity').getObject('träna').addInnerList('inte gym', trainingList);
 
 
-	// Årstider, görs automatiskt
+	// Seasons, görs automatiskt
 
 
 	data.addObject('timeofday', 'När på dagen är det?');
@@ -146,7 +147,7 @@ function initMap(){
 
 // Inclusive on both start and end
 // Summer: Maj - august: 4-7
-// Vår: mars -maj: 2-4
+// Spring: mars -maj: 2-4
 function isBetweenMonths(start, end){ // January = 0
 	var mm = date.getMonth();
 	console.log('DEBUG @isBetweenMonths', start, end, mm, (mm >= start && mm <= end));
@@ -154,14 +155,6 @@ function isBetweenMonths(start, end){ // January = 0
 		return true;
 	}
 	return false;
-}
-
-function getKeys(){
-	return map.keys();
-}
-
-function add(key, set){
-	map.set(key, set);
 }
 
 function getListFromMarked(){
@@ -209,17 +202,17 @@ function updateResult(set){
 		ul.appendChild(el);
 		ul.appendChild(text);
 	});
+	//var currBody = document.getElementById(htmlInnerID);
+	//currBody.replaceChild(ul, body);
 	body.appendChild(ul);
 }
 
 function updateVisibleList(obj){ // DataObject
-	//console.log(obj+''); // Use toString method
 	var body = document.getElementById(htmlListID);
 	updateHTML(body, obj, -1, 2);
 }
 
 function updateHTML(body, obj, index, num){
-	//console.log(obj.heldObjects);
 	for(var i = 0; i < obj.heldObjects.length; i++){
 		var temp = obj.heldObjects[i];
 		var question = temp.question;
