@@ -3,6 +3,7 @@
 
 var map;
 var date;
+const htmlmainID = 'main';
 const htmlListID = 'marked';
 const htmlResultID = 'result';
 const htmlInnerID = 'markedInner';
@@ -170,6 +171,7 @@ function getListFromMarked(){
 	getChecked(map, marked, set);
 	console.log(set);
 	updateResult(set);
+	document.getElementById(htmlmainID).classList.add('hidden');
 }
 
 function getChecked(mapStruct, htmlData, set){
@@ -202,12 +204,9 @@ function updateResult(set){
 	set.forEach(element => {
 		var innerName = element;
 		var el = document.createElement('li');
-		var text = document.createTextNode(innerName);
+		el.innerHTML = innerName;
 		ul.appendChild(el);
-		ul.appendChild(text);
 	});
-	//var currBody = document.getElementById(htmlInnerID);
-	//currBody.replaceChild(ul, body);
 	body.appendChild(ul);
 }
 
